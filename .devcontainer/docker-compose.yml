@@ -11,7 +11,7 @@ services:
     container_name: cloud-computing-assignment-2
     volumes:
       - ..:/app
-      - ~/.aws/credentials:/.aws/credentials
+      - ~/.aws/credentials:/home/vscode/.aws/credentials
     command: sleep infinity
     environment:
       PORT: 8080
