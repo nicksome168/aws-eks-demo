@@ -33,6 +33,11 @@ RUN apt-get install unzip wget -y \
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && sudo ./aws/install
+# Install minikube
+RUN curl https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64 -o "minikube-linux-arm64" \
+    && sudo install minikube-linux-arm64 /usr/local/bin/minikube \
+    && echo "alias k='/usr/local/bin/kubectl'" >> /home/$USERNAME/.bash_aliases \
+    && echo "alias kns='kubectl config set-context --current --namespace'" >> /home/$USERNAME/.bash_aliases
 
 # Set up the Python development environment
 WORKDIR /app
