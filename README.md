@@ -1,11 +1,36 @@
 # eks-demo
 Assignment 2 for Cloud-Computing-AWS-CSGY-9223
 
-Setup kubeconfig for EKS cluster
+
+## AWS CLI
+Check using which AWS profile
 ```
-aws eks --region us-east-1 update-kubeconfig --name eks-cluster --profile terraform
+aws sts get-caller-identity
 ```
 
+Switch AWS profile
+```
+export AWS_DEFAULT_PROFILE=<user>
+```
+
+Setup kubeconfig for EKS cluster
+```
+aws eks --region us-east-1 update-kubeconfig --name eks --profile <user>
+```
+
+Add IAM User to EKS cluster
+```
+kubectl edit -n kube-system configmap/aws-auth
+```
+```
+mapUsers: |
+    - groups:
+      - eks-console-dashboard-restricted-access-group      
+      userarn: arn:aws:iam::444455556666:user/my-user
+      username: my-user
+```
+
+## Minikube
 Start minikube with docker driver
 ```bash
 minikube start -- driver=docker

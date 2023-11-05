@@ -22,7 +22,7 @@ resource "aws_iam_policy_attachment" "eks_cluster_policy" {
 }
 
 resource "aws_eks_cluster" "eks" {
-  name     = "eks-cluster"
+  name     = "eks"
   role_arn = aws_iam_role.eks_cluster.arn
 
   vpc_config {
