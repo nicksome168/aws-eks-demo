@@ -2,6 +2,10 @@
 Assignment 2 for Cloud-Computing-AWS-CSGY-9223
 
 
+## Prerequisite
+Install [remote container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension on your VS code. Open this repository folder in VS Code and start the dev environment in container.
+
+
 ## AWS CLI
 Check using which AWS profile
 ```

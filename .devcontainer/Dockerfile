@@ -34,8 +34,10 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv
     && unzip awscliv2.zip \
     && sudo ./aws/install
 # Install minikube
-RUN curl https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64 -o "minikube-linux-arm64" \
-    && sudo install minikube-linux-arm64 /usr/local/bin/minikube \
+RUN curl https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 -o "minikube-linux-amd64" \
+    && sudo install minikube-linux-amd64 /usr/local/bin/minikube \
+    && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+    && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
     && echo "alias k='/usr/local/bin/kubectl'" >> /home/$USERNAME/.bash_aliases \
     && echo "alias kns='kubectl config set-context --current --namespace'" >> /home/$USERNAME/.bash_aliases
 
