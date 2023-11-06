@@ -1,0 +1,32 @@
+# Use the official Python 3.9 image with the "slim" version
+FROM python:3.9-slim-buster
+
+# Install the virtualenv package using pip
+RUN pip install virtualenv
+
+# Set the environment variable VIRTUAL_ENV to /venv
+ENV VIRTUAL_ENV=/venv
+
+# Create a virtual environment named "venv" with Python 3
+RUN virtualenv venv -p python3
+
+# Add the virtual environment's bin directory to the PATH
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Set the working directory inside the container to /app
+WORKDIR /app
+
+# Copy the contents of the current directory (context) to /app in the container
+COPY . /app
+
+# Install Python packages specified in requirements.txt using pip
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# Set the environment variable FLASK_APP to "app.py"
+ENV FLASK_APP app.py
+
+# Expose port 8200 for external communication
+EXPOSE 8200
+
+# Define the command to run when the container starts (start your Flask app)
+CMD ["python", "app.py"]
