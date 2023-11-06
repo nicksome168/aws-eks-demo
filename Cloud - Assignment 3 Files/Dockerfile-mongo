@@ -1,0 +1,5 @@
+# Use the official MongoDB image from the Docker Hub
+FROM mongo
+
+# Expose port 27017 for MongoDB connections
+EXPOSE 27017
