@@ -6,14 +6,14 @@ Assignment 2 for Cloud-Computing-AWS-CSGY-9223
 Install [remote container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension on your VS code. Open this repository folder in VS Code and start the dev environment in container.
 ## Documentation
 ### Setup and use EKS cluster
-Check using which AWS profile
-```
-aws sts get-caller-identity
-```
-
 Switch AWS profile if needed
 ```
 export AWS_DEFAULT_PROFILE=<user>
+```
+
+Check if you are using the right AWS profile
+```
+aws sts get-caller-identity
 ```
 
 Apply the terraform configuration in `terraform` and it will create a eks cluster and a node group
@@ -53,6 +53,10 @@ kubectl port-forward svc/prometheus-operated 9090
 uninstall prometheus
 ```
 helm uninstall prometheus
+```
+delete all resources on eks cluster
+```
+kubectl delete -f k8s/*.yaml
 ```
 uninstall eks cluster
 ```
