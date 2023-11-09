@@ -56,7 +56,7 @@ helm uninstall prometheus
 ```
 delete all resources on eks cluster
 ```
-kubectl delete -f k8s/*.yaml
+kubectl delete -f k8s/app.yaml
 ```
 uninstall eks cluster
 ```
