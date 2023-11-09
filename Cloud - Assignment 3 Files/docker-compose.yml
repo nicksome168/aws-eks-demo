@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  flask:
+    image: todo-app:0.0.1
+    ports:
+      - "8200:8200"
+    depends_on:
+      - mongodb-service
+
+  mongodb-service:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb-data:/data/db
