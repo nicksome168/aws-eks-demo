@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: flask-app-deployment
 spec:
-  replicas: 1  
+  replicas: 2
   selector:
     matchLabels:
       app: flask-app
@@ -14,9 +14,14 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: jayesh1302/todo-app:0.0.1  
+        image: jayesh1302/todo-app:0.0.2
         ports:
-        - containerPort: 8200  
+        - containerPort: 8200
+  strategy:
+    type: RollingUpdate  
+    rollingUpdate:
+      maxUnavailable: 1  
+
 
 ---
 apiVersion: apps/v1
@@ -24,7 +29,7 @@ kind: Deployment
 metadata:
   name: mongodb-deployment
 spec:
-  replicas: 1  
+  replicas: 2
   selector:
     matchLabels:
       app: mongodb
@@ -35,9 +40,13 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: jayesh1302/todo-mongo:0.0.1 
+        image: mongo:latest 
         ports:
-        - containerPort: 27017  
+        - containerPort: 27017
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+      maxUnavailable: 1 
 
 ---
 apiVersion: v1
