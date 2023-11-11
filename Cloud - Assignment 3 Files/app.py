@@ -37,13 +37,21 @@ def tasks ():
 	a2="active"
 	return render_template('index.html',a2=a2,todos=todos_l,t=title,h=heading)
 
-
 @app.route("/completed")
 def completed ():
 	#Display the Completed Tasks
 	todos_l = todos.find({"done":"yes"})
 	a3="active"
 	return render_template('index.html',a3=a3,todos=todos_l,t=title,h=heading)
+
+def healthz():
+    # Add health check logic here
+    return "OK", 200
+
+@app.route('/readiness')
+def readiness():
+    # Add readiness check logic here
+    return "OK", 200
 
 @app.route("/done")
 def done ():
