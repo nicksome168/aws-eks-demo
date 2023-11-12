@@ -24,7 +24,7 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongodb-deployment
 spec:
@@ -42,7 +42,32 @@ spec:
           image: mongo:latest
           ports:
             - containerPort: 27017
-
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /data/db
+      volumes:
+        - name: persistent-storage
+          persistentVolumeClaim:
+            claimName: ebs-claim
+---
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: ebs-sc
+# provisioner: ebs.csi.aws.com
+# volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp2
+  resources:
+    requests:
+      storage: 4Gi
 ---
 apiVersion: v1
 kind: Service
